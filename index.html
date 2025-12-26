@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ALAMAN — User Manual</title>
+  <meta name="description" content="ALAMAN Mobile App — User Manual (Android)" />
+  <style>
+    :root{
+      --bg:#fcfcfd;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0ea5a4;
+      --accent-contrast:#ffffff;
+      --border:#e6e9ef;
+      --max-width:1000px;
+      --radius:10px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:#0f172a;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,#f8fafc 0%, #ffffff 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:1rem;
+      display:flex;
+      justify-content:center;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+      background:var(--bg);
+      padding:1rem;
+    }
+
+    header.site-header{
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      margin-bottom:1rem;
+    }
+
+    .brand{
+      display:flex;
+      gap:0.75rem;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),#06b6d4);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--accent-contrast);
+      font-weight:700;
+      font-size:18px;
+      box-shadow:0 6px 18px rgba(6,95,88,0.08);
+    }
+    h1{font-size:1.25rem;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:0.95rem}
+
+    nav.topnav{
+      margin-top:0.75rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      border-radius:var(--radius);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:0.5rem;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      color:inherit;
+      text-decoration:none;
+      padding:0.5rem 0.65rem;
+      border-radius:8px;
+      font-size:0.95rem;
+    }
+    .nav-links a:hover{background:rgba(14,165,164,0.08)}
+    .cta{
+      background:var(--accent);
+      color:var(--accent-contrast);
+      padding:0.5rem 0.75rem;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      font-size:0.95rem;
+    }
+
+    /* layout */
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:1rem;
+    }
+
+    main{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:1rem;
+    }
+
+    section{
+      padding:0.5rem 0;
+      border-bottom:1px dashed #eef2f7;
+    }
+    section:last-of-type{border-bottom:0}
+    h2{margin:0 0 0.5rem 0;font-size:1.05rem}
+    h3{margin:0.25rem 0 0.5rem 0;font-size:0.98rem}
+    .muted{color:var(--muted);font-size:0.95rem}
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      padding:0.75rem;
+      border-radius:8px;
+      margin:0.5rem 0;
+    }
+
+    ol{padding-left:1.2rem}
+    ul{padding-left:1.2rem}
+
+    figure.screenshot{
+      margin:0.6rem 0;
+      padding:0.75rem;
+      border-radius:8px;
+      border:1px dashed #e6eef0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:120px;
+      color:var(--muted);
+      background:linear-gradient(180deg,#fbfcfd,#ffffff);
+    }
+
+    /* Index and glossary lists */
+    .term-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.5rem 1rem;
+      list-style:none;
+      padding:0;
+      margin:0.25rem 0;
+    }
+    .term-list li{
+      padding:0.35rem 0.55rem;
+      background:#f8fafb;
+      border:1px solid #eef2f3;
+      border-radius:999px;
+      font-size:0.92rem;
+      color:#0f172a;
+    }
+
+    dl{margin:0.25rem 0}
+    dt{font-weight:700;margin-top:0.5rem}
+    dd{margin:0 0 0.6rem 0;color:var(--muted)}
+
+    footer.site-footer{
+      margin-top:1rem;
+      font-size:0.9rem;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    /* mobile nav toggle */
+    .menu-toggle{
+      display:none;
+      background:transparent;
+      border:1px solid var(--border);
+      padding:0.4rem;
+      border-radius:8px;
+    }
+
+    @media (min-width:860px){
+      .grid{
+        grid-template-columns: 1fr 320px;
+        gap:1rem;
+      }
+      .toc{
+        position:sticky;
+        top:1rem;
+        align-self:start;
+      }
+    }
+
+    @media (max-width:860px){
+      .menu-toggle{display:inline-flex}
+      .nav-links{display:none}
+      .nav-links.open{display:flex;flex-direction:column;background:#fff;padding:0.6rem;border:1px solid var(--border);border-radius:8px;position:absolute;right:1rem;top:76px;z-index:30;box-shadow:0 8px 30px rgba(6,95,88,0.06)}
+    }
+
+    /* small adjustments */
+    code{background:#f1f5f9;padding:0.15rem 0.35rem;border-radius:4px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:0.92rem}
+  </style>
+</head>
+<body>
+  <div class="container" role="document">
+    <header class="site-header" role="banner">
+      <a class="brand" href="#home-intro" aria-label="ALAMAN home">
+        <div class="logo">A</div>
+        <div>
+          <h1>ALAMAN — User Manual</h1>
+          <p class="lead">Private running club app — Android (Flutter)</p>
+        </div>
+      </a>
+
+      <nav class="topnav" aria-label="Main navigation">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="navlinks" id="menuToggle">☰</button>
+        <div id="navlinks" class="nav-links" role="navigation">
+          <a href="#home-intro">Home</a>
+          <a href="#user-guide">User Guide</a>
+          <a href="#index">Index</a>
+          <a href="#glossary">Glossary</a>
+          <a href="#docs-access">Docs / GitHub Pages</a>
+          <a class="cta" href="#user-guide">Start Guide</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <main aria-labelledby="main-heading">
+        <section id="home-intro" aria-labelledby="home-heading">
+          <h2 id="home-heading">Homepage / Introduction</h2>
+          <p class="muted">Welcome to the ALAMAN User Manual. This document explains how to register, record runs, view routes and statistics, post achievements, participate in events, and — for admins — manage club events and registration forms. The ALAMAN app is built with Flutter and targets Android devices.</p>
+
+          <div class="card">
+            <h3>Purpose of this manual</h3>
+            <p class="muted">This manual provides step-by-step instructions and placeholders for screenshots to help end users and administrators use the ALAMAN mobile app. Use this as a reference during onboarding, troubleshooting, and for creating tutorials.</p>
+            <p class="muted"><strong>Supported platform:</strong> Android (built with Flutter)</p>
+          </div>
+        </section>
+
+        <section id="user-guide" aria-labelledby="guide-heading">
+          <h2 id="guide-heading">Full User Guide</h2>
+
+          <article aria-labelledby="guide-register">
+            <h3 id="guide-register">Registering an account</h3>
+            <p class="muted">Follow these steps to create a new account.</p>
+            <ol>
+              <li>Open the ALAMAN app on your Android device.</li>
+              <li>Tap <strong>Create Account</strong> (or <strong>Register</strong>).</li>
+              <li>Enter your full name, email address, and a secure password.</li>
+              <li>Accept the terms and privacy policy, then tap <strong>Sign Up</strong>.</li>
+              <li>Verify your email if prompted (check your inbox for a verification link).</li>
+            </ol>
+            <figure class="screenshot" role="img" aria-label="Register screenshot placeholder">Screenshot here</figure>
+          </article>
+
+          <article aria-labelledby="guide-login">
+            <h3 id="guide-login">Logging into the app</h3>
+            <p class="muted">Steps to sign in to ALAMAN after registering.</p>
+            <ol>
+              <li>Open the ALAMAN app.</li>
+              <li>Tap <strong>Log In</strong>.</li>
+              <li>Enter your registered email and password.</li>
+              <li>Tap <strong>Sign In</strong>. Optionally enable "Remember me" for quicker access.</li>
+              <li>If you forget your password, tap <strong>Forgot password</strong> and follow the reset flow.</li>
+            </ol>
+            <figure class="screenshot" role="img" aria-label="Login screenshot placeholder">Screenshot here</figure>
+          </article>
+
+          <article aria-labelledby="guide-recording">
+            <h3 id="guide-recording">Recording a run using GPS</h3>
+            <p class="muted">How to start and stop GPS-based tracking.</p>
+            <ol>
+              <li>From the home screen, tap <strong>Start Run</strong> or the GPS/Record icon.</li>
+              <li>Allow location permissions when prompted (necessary for GPS tracking).</li>
+              <li>Wait for GPS lock (the app will show an indicator when accurate).</li>
+              <li>Tap <strong>Start</strong> to begin recording.</li>
+              <li>During the run you can pause or end the run. Tap <strong>End</strong> when finished.</li>
+              <li>Review the saved route, summary and stats, then tap <strong>Save</strong> or <strong>Discard</strong>.</li>
+            </ol>
+            <figure class="screenshot" role="img" aria-label="Recording screenshot placeholder">Screenshot here</figure>
+          </article>
+
+          <article aria-labelledby="guide-viewing">
+            <h3 id="guide-viewing">Viewing completed routes and statistics</h3>
+            <p class="muted">Access your run history and detailed stats.</p>
+            <ol>
+              <li>Open the app and go to <strong>My Runs</strong> or <strong>Routes</strong>.</li>
+              <li>Select a completed run from the list to see the route map and summary.</li>
+              <li>Review statistics such as distance, duration, pace, elevation, and calories.</li>
+              <li>Use the export or share button to share the route or export GPX if available.</li>
+            </ol>
+            <figure class="screenshot" role="img" aria-label="Routes screenshot placeholder">Screenshot here</figure>
+          </article>
+
+          <article aria-labelledby="guide-posting">
+            <h3 id="guide-posting">Posting achievements</h3>
+            <p class="muted">Share achievements with your club.</p>
+            <ol>
+              <li>Open <strong>Achievements</strong> or <strong>Activity Feed</strong>.</li>
+              <li>Tap <strong>New Post</strong> or <strong>Share Achievement</strong>.</li>
+              <li>Attach a route, photo, or write a message describing your achievement.</li>
+              <li>Choose visibility (club-only or public within the group).</li>
+              <li>Tap <strong>Post</strong> to publish.</li>
+            </ol>
+            <figure class="screenshot" role="img" aria-label="Post screenshot placeholder">Screenshot here</figure>
+          </article>
+
+          <article aria-labelledby="guide-register-event">
+            <h3 id="guide-register-event">Registering for club events</h3>
+            <p class="muted">Sign up for events announced by the club owner.</p>
+            <ol>
+              <li>Open <strong>Events</strong> in the app.</li>
+              <li>Browse upcoming event announcements and select one to open details.</li>
+              <li>Tap <strong>Register</strong> or <strong>Sign Up</strong>.</li>
+              <li>Fill out any required registration fields (e.g., emergency contact, t-shirt size).</li>
+              <li>Confirm your registration and check for a confirmation message or email.</li>
+            </ol>
+            <figure class="screenshot" role="img" aria-label="Event registration screenshot placeholder">Screenshot here</figure>
+          </article>
+
+          <article aria-labelledby="guide-admin">
+            <h3 id="guide-admin">Admin-only features</h3>
+            <p class="muted">Features available to club owners / admins. Access requires an admin account.</p>
+
+            <h4>Creating event announcements</h4>
+            <ol>
+              <li>Log in with an admin account and open the <strong>Admin Panel</strong> or <strong>Events</strong> management area.</li>
+              <li>Tap <strong>Create Event</strong>.</li>
+              <li>Enter event title, date/time, location, description, and any images.</li>
+              <li>Set registration options (capacity, registration deadline, fee if applicable).</li>
+              <li>Publish the announcement so members can view and register.</li>
+            </ol>
+            <figure class="screenshot" role="img" aria-label="Admin event create screenshot placeholder">Screenshot here</figure>
+
+            <h4>Creating and managing registration forms</h4>
+            <ol>
+              <li>In the Admin Panel, open <strong>Registration Forms</strong> or event-specific settings.</li>
+              <li>Create a new form or edit an existing one. Add fields like emergency contact, medical notes, shirt size.</li>
+              <li>Configure which fields are required and any privacy options.</li>
+              <li>Save and attach the form to an event. Monitor registrations from the admin dashboard.</li>
+            </ol>
+            <figure class="screenshot" role="img" aria-label="Admin form management screenshot placeholder">Screenshot here</figure>
+          </article>
+
+        </section>
+
+        <section id="index" aria-labelledby="index-heading">
+          <h2 id="index-heading">Index (Alphabetical)</h2>
+          <p class="muted">Quick alphabetical list of important terms used in this manual and app.</p>
+
+          <ul class="term-list" aria-label="Important terms">
+            <li>Account</li>
+            <li>Achievements</li>
+            <li>Admin Panel</li>
+            <li>Events</li>
+            <li>Event Registration</li>
+            <li>Flutter</li>
+            <li>GPS Tracking</li>
+            <li>Login</li>
+            <li>Notifications</li>
+            <li>Registration</li>
+            <li>Route Map</li>
+            <li>Statistics</li>
+            <li>User Profile</li>
+          </ul>
+        </section>
+
+        <section id="glossary" aria-labelledby="glossary-heading">
+          <h2 id="glossary-heading">Glossary</h2>
+          <p class="muted">Definitions of key terms used in the ALAMAN app and manual.</p>
+
+          <dl>
+            <dt>GPS Tracking</dt>
+            <dd>Use of the device's GPS sensor to record geographic coordinates over time in order to produce a route map of a run or activity.</dd>
+
+            <dt>Achievement</dt>
+            <dd>A milestone or accomplishment posted by a user (example: personal best distance, fastest pace, completed challenge) which can be shared within the club.</dd>
+
+            <dt>Event</dt>
+            <dd>A scheduled club activity (race, group run, meeting) announced by an admin; users can register to participate.</dd>
+
+            <dt>Admin Panel</dt>
+            <dd>The administrative interface available to club owners where events, registration forms, announcements and user management are performed.</dd>
+
+            <dt>Flutter</dt>
+            <dd>An open-source UI toolkit by Google used to build natively compiled applications for mobile (Android and iOS), web, and desktop from a single codebase. ALAMAN is developed with Flutter.</dd>
+
+            <dt>User Profile</dt>
+            <dd>A user's account page containing profile information, statistics, activity history, and settings.</dd>
+
+            <dt>Statistics</dt>
+            <dd>Quantitative summaries of runs and activities such as total distance, average pace, elevation gain, and number of activities.</dd>
+
+            <dt>Authentication</dt>
+            <dd>The process of verifying a user's identity, typically via email/password sign-in, social login, or token-based authentication used by the app to secure user accounts.</dd>
+          </dl>
+        </section>
+
+        <section id="docs-access" aria-labelledby="docs-access-heading">
+          <h2 id="docs-access-heading">Documentation Access (GitHub Pages)</h2>
+          <p class="muted">This user manual can be hosted as a static site using GitHub Pages. To publish:</p>
+          <ol>
+            <li>Create a GitHub repository named <code>alaman-user-manual</code> (or any name you choose).</li>
+            <li>Upload this file as <code>index.html</code> to the repository root, or place it in a <code>docs/</code> folder.</li>
+            <li>In the repository Settings → Pages, set the Source to the branch and folder where the file is stored (e.g., <strong>main / root</strong> or <strong>main / docs</strong>), or deploy to <code>gh-pages</code>.</li>
+            <li>After a short time, your manual will be available at the GitHub Pages URL shown in Settings.</li>
+          </ol>
+
+          <p class="muted">Example URL format (replace <code>USERNAME</code> with your GitHub login):</p>
+          <div class="card"><code>https://Assel.github.io/Alaman-user-manual/</code></div>
+
+          <p class="muted">Notes:</p>
+          <ul>
+            <li>If you put the file in a <code>docs/</code> folder on <code>main</code>, choose that folder in Pages settings.</li>
+            <li>For a more advanced site with search, navigation and theming, consider MkDocs or Docusaurus and deploy via GitHub Actions (not required for this static file).</li>
+          </ul>
+        </section>
+
+        <section id="feedback" aria-labelledby="feedback-heading">
+          <h2 id="feedback-heading">Feedback & Updates</h2>
+          <p class="muted">To suggest edits to this manual or report inaccuracies, open an issue in the documentation repository or submit a pull request with changes to <code>index.html</code>. Keep screenshots updated with each app release.</p>
+        </section>
+      </main>
+
+      <aside class="toc" aria-label="Table of contents">
+        <div class="card">
+          <h3>Contents</h3>
+          <nav aria-label="Document sections">
+            <ul style="padding-left:1rem;margin:0.25rem 0">
+              <li><a href="#home-intro">Homepage / Introduction</a></li>
+              <li><a href="#user-guide">Full User Guide</a>
+                <ul style="margin-top:0.25rem">
+                  <li><a href="#guide-register">Registering an account</a></li>
+                  <li><a href="#guide-login">Logging in</a></li>
+                  <li><a href="#guide-recording">Recording a run</a></li>
+                  <li><a href="#guide-viewing">Viewing routes & stats</a></li>
+                  <li><a href="#guide-posting">Posting achievements</a></li>
+                  <li><a href="#guide-register-event">Event registration</a></li>
+                  <li><a href="#guide-admin">Admin-only features</a></li>
+                </ul>
+              </li>
+              <li><a href="#index">Index</a></li>
+              <li><a href="#glossary">Glossary</a></li>
+              <li><a href="#docs-access">Docs / GitHub Pages</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="card" style="margin-top:0.75rem">
+          <h3>Quick tips</h3>
+          <ul style="margin:0.25rem 0;padding-left:1rem">
+            <li>Grant location permissions for accurate GPS tracking.</li>
+            <li>Use a stable internet connection for event registration and posting.</li>
+            <li>Admins should periodically export registrations for record-keeping.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+      <div>© ALAMAN · User Manual</div>
+      <div class="muted">Built with Flutter (app). Docs hosted via GitHub Pages.</div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile nav toggle
+    (function(){
+      const toggle = document.getElementById('menuToggle');
+      const nav = document.getElementById('navlinks');
+      if(!toggle || !nav) return;
+      toggle.addEventListener('click', function(){
+        const open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+
+      // Smooth scroll for internal links
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const href = this.getAttribute('href');
+          if(!href || href === '#') return;
+          const el = document.querySelector(href);
+          if(el){
+            e.preventDefault();
+            el.scrollIntoView({behavior:'smooth', block:'start'});
+            // close mobile nav if open
+            if(nav.classList.contains('open')){
+              nav.classList.remove('open');
+              toggle.setAttribute('aria-expanded','false');
+            }
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
